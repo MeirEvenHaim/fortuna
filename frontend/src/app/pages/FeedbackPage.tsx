@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Heart, Send, Star, MessageCircle, Users, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import fortunaLogo from '../../assets/fortuna-logo.png';
+import { PublicComments } from '../components/PublicComments';
 
 interface FeedbackFormData {
   rating: number;
@@ -18,6 +19,9 @@ interface FeedbackFormData {
 
 export function FeedbackPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<FeedbackFormData>({
     defaultValues: {
       rating: 0,
@@ -35,13 +39,29 @@ export function FeedbackPage() {
   const rating = watch('rating');
   const wouldRecommend = watch('wouldRecommend');
 
-  const onSubmit = (data: FeedbackFormData) => {
-    console.log('Feedback submitted:', data);
-    // Here you would typically send the data to your backend
-    setSubmitted(true);
+  const onSubmit = async (data: FeedbackFormData) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Scroll to top to show success message
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      const response = await fetch('/api/feedbacks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('שגיאה בשליחת המשוב');
+      }
+
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      console.error('Error submitting feedback:', err);
+      setSubmitError('אירעה שגיאה בשמירת המשוב. אנא נסו שוב מאוחר יותר.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -300,15 +320,28 @@ export function FeedbackPage() {
             </div>
           </div>
 
+          {submitError && (
+             <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-center">
+               {submitError}
+             </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-pink-600 via-rose-500 to-red-500 text-white py-5 px-8 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-xl hover:shadow-pink-500/50 flex items-center justify-center gap-3 group"
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-pink-600 via-rose-500 to-red-500 text-white py-5 px-8 rounded-2xl font-bold text-lg hover:scale-105 transition-all shadow-xl hover:shadow-pink-500/50 flex items-center justify-center gap-3 group disabled:opacity-70 disabled:hover:scale-100"
           >
-            <Send className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            שליחת משוב
+            {isSubmitting ? 'שולח...' : (
+              <>
+                <Send className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                שליחת משוב
+              </>
+            )}
           </button>
         </form>
+
+        <PublicComments />
       </div>
     </div>
   );
