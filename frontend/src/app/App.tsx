@@ -6,6 +6,7 @@ import { FeedbackPage } from './pages/FeedbackPage';
 import { OrderPage } from './pages/OrderPage';
 import { AboutPage } from './pages/AboutPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { JourneyPage } from './pages/JourneyPage';
 import { Navigation } from './components/Navigation';
 // import { WhatsAppButton } from './components/WhatsAppButton';
 
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/order" element={<OrderPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/journey" element={<JourneyPage />} />
         </Routes>
         {/* <WhatsAppButton /> */}
       </div>

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
-import { Features } from '../components/Features';
-import { ProductCarousel } from '../components/ProductCarousel';
+import { WhatIsFortuna, GameLevElLevSection, TargetAudience, WhyItWorks, FounderSection, BottomCTA } from '../components/HomeSections';
 import { Footer } from '../components/Footer';
 
 export function HomePage() {
   return (
     <>
       <Hero />
-      <Features />
-      <ProductCarousel />
+      <WhatIsFortuna />
+      <GameLevElLevSection />
+      <TargetAudience />
+      <WhyItWorks />
+      <FounderSection />
+      <BottomCTA />
       <Footer />
     </>
   );
