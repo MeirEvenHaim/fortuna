@@ -1,0 +1,55 @@
+# Jenkins Helm Values — Fortuna POC
+# These overrides configure Jenkins to run inside Minikube
+# with the plugins needed for the Fortuna CI/CD pipeline.
+
+controller:
+  # Admin credentials
+  admin:
+    username: "admin"
+
+  # Pre-install required plugins
+  installPlugins:
+    - kubernetes:latest
+    - workflow-aggregator:latest
+    - git:latest
+    - docker-workflow:latest
+    - pipeline-stage-view:latest
+    - credentials-binding:latest
+    - nodejs:latest
+
+  # Resource limits for POC (keep it lightweight)
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+  # Service type — ClusterIP, we'll port-forward
+  serviceType: ClusterIP
+
+  # JCasC (Jenkins Configuration as Code)
+  JCasC:
+    configScripts:
+      welcome-message: |
+        jenkins:
+          systemMessage: "Welcome to the Fortuna CI/CD POC — deployed inside Minikube!"
+
+persistence:
+  enabled: true
+  size: "5Gi"
+
+agent:
+  # Use Kubernetes plugin to spin up build agents as pods
+  enabled: true
+  image:
+    repository: "jenkins/inbound-agent"
+    tag: "latest"
+  resources:
+    requests:
+      cpu: "256m"
+      memory: "512Mi"
+    limits:
+      cpu: "512m"
+      memory: "1Gi"

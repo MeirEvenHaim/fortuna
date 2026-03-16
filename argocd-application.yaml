@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your-org/your-repo.git' # Replace with actual repository URL
+    repoURL: 'https://github.com/MeirEvenHaim/fortuna.git'
     targetRevision: HEAD
     path: k8s
   destination:

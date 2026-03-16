@@ -16,5 +16,6 @@ spec:
       containers:
         - name: frontend
           image: meirevenhaim/fortuna-frontend:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 80
+            - containerPort: 8080

@@ -7,6 +7,10 @@ import { OrderPage } from './pages/OrderPage';
 import { AboutPage } from './pages/AboutPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { JourneyPage } from './pages/JourneyPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { VideoCoursesPage } from './pages/VideoCoursesPage';
+import { CommunityPage } from './pages/CommunityPage';
 import { Navigation } from './components/Navigation';
 // import { WhatsAppButton } from './components/WhatsAppButton';
 
@@ -23,6 +27,10 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/journey" element={<JourneyPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/courses" element={<VideoCoursesPage />} />
+          <Route path="/community" element={<CommunityPage />} />
         </Routes>
         {/* <WhatsAppButton /> */}
       </div>

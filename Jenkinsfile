@@ -88,7 +88,7 @@ pipeline {
                         git add k8s/*-deployment.yaml
                         git commit -m "chore: update image tags to ${IMAGE_TAG} [skip ci]" || echo "No changes to commit"
                         # Make sure to replace your-repo-url with the actual git remote
-                        git push https://${GIT_USER}:${GIT_PASS}@github.com/your-org/your-repo.git HEAD:main
+                        git push https://${GIT_USER}:${GIT_PASS}@github.com/MeirEvenHaim/fortuna.git HEAD:main
                     '''
                 }
             }

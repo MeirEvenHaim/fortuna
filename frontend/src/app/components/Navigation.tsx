@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heart, Home, Menu, X, MessageCircle, User } from 'lucide-react';
+import { Heart, Home, Menu, X, MessageCircle, User, PlayCircle, Users } from 'lucide-react';
 import fortunaIcon from '../../assets/fortuna-icon.png';
 
 export function Navigation() {
@@ -73,6 +73,28 @@ export function Navigation() {
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>משוב</span>
+                </Link>
+
+                <Link
+                  to="/community"
+                  className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all text-sm ${isActive('/community')
+                    ? 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 font-medium'
+                    : 'text-gray-700 hover:text-pink-600 hover:bg-pink-50'
+                    }`}
+                >
+                  <Users className="w-4 h-4" />
+                  <span>קהילה</span>
+                </Link>
+
+                <Link
+                  to="/courses"
+                  className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all text-sm ${isActive('/courses')
+                    ? 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 font-medium'
+                    : 'text-gray-700 hover:text-pink-600 hover:bg-pink-50'
+                    }`}
+                >
+                  <PlayCircle className="w-4 h-4" />
+                  <span>קורסים</span>
                 </Link>
 
                 <Link
@@ -164,6 +186,30 @@ export function Navigation() {
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>משוב</span>
+              </Link>
+
+              <Link
+                to="/community"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/community')
+                  ? 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 font-medium'
+                  : 'text-gray-700 hover:bg-pink-50'
+                  }`}
+              >
+                <Users className="w-5 h-5" />
+                <span>קהילה</span>
+              </Link>
+
+              <Link
+                to="/courses"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive('/courses')
+                  ? 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 font-medium'
+                  : 'text-gray-700 hover:bg-pink-50'
+                  }`}
+              >
+                <PlayCircle className="w-5 h-5" />
+                <span>קורסים</span>
               </Link>
 
               <Link
